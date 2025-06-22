@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.0](https://github.com/hanhan258/karin-plugin-levi/compare/v1.1.2...v1.2.0) (2025-06-22)
+
+
+### Features
+
+* remove deprecated commands and add new features ([58ca4d9](https://github.com/hanhan258/karin-plugin-levi/commit/58ca4d9615b4e542f21bb17410fd84baf7d97c4a))
+* 添加ffmpeg路径配置和台风路径录制功能 ([bb936d8](https://github.com/hanhan258/karin-plugin-levi/commit/bb936d8470eb114e1ce17d192a128678b78cdffd))
+* 添加ffmpeg路径配置和台风路径录制功能 ([7c11818](https://github.com/hanhan258/karin-plugin-levi/commit/7c11818db8d02afe2cdd6ba2d89f7b6562883e25))
+* 添加媒体插件功能，包含动态命令注册和菜单渲染 ([b60d259](https://github.com/hanhan258/karin-plugin-levi/commit/b60d259869b6c0c5cf57d184387bd89f2b2e8bd9))
+
 ## [1.1.2](https://github.com/hanhan258/karin-plugin-levi/compare/v1.1.1...v1.1.2) (2025-06-20)
 
 
