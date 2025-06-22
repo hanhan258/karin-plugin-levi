@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{type}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #fdfbff, #dbf2ff);
+            padding: 20px;
+            display: inline-block;
+        }
+
+        .card {
+            width: 660px;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            text-align: left;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+        }
+
+        h1 {
+            margin: 0;
+            color: #458dfd;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+        }
+
+        ul {
+            padding: 0;
+            margin: 10px 0 20px 15px;
+        }
+
+        li {
+            margin-bottom: 3px;
+            font-size: 16px;
+            color: #444;
+        }
+
+        .foot {
+            font-size: 12px;
+            color: #aaa;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>{{type}} (共{{total}}种)</h1>
+        <ul>
+            {{each commands}}<li>🔖 {{$value}}</li>{{/each}}
+        </ul>
+        <div>🎯 使用方法：</div>
+        <ul>
+            {{each usage}}<li>👉 {{$value}}</li>{{/each}}
+        </ul>
+        <div class="foot">⏰ 数据更新：{{updateTime}}</div>
+    </div>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 'use strict'
 import { karin, exec } from 'node-karin'
-import { config } from '../lib/config.js'
+import { config } from '../../lib/config.js'
 import pingMan from 'pingman'
 import dns from 'dns'
 import net from 'net'

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{pluginName}} 菜单</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', ui-sans-serif, sans-serif;
+            background-image: linear-gradient(135deg, #ffadd2, #ffe7f6);
+            padding: 20px;
+            display: inline-block;
+        }
+
+        .menu {
+            width: 600px;
+            border-radius: 15px;
+            box-shadow: 4px 8px 20px rgba(0, 0, 0, .1);
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px 30px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .head {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #f66;
+            text-shadow: 1px 1px 4px rgba(255, 100, 120, 0.5);
+        }
+
+        .command {
+            padding: 8px 16px;
+            margin-bottom: 4px;
+            background-color: rgba(255, 255, 255, .75);
+            border-radius: 5px;
+            border-left: 5px solid #ffa7c4;
+            font-size: 16px;
+            color: #555;
+            box-shadow: rgba(255, 140, 180, 0.2) 2px 2px 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="head">🌟 {{ pluginName }} 菜单 🌟</div>
+        {{each commands}}
+        <div class="command">
+            🔖 {{ $value.command }} <small style="opacity:0.65">({{ $value.file }})</small>
+        </div>
+        {{/each}}
+    </div>
+</body>
+
+</html>
