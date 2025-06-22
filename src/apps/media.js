@@ -50,7 +50,7 @@ async function fetchWithTimeout(url, options = {}) {
       ...options,
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'User-Agent': '@karin-plugin-levi',
         ...options.headers
       }
     })
@@ -295,9 +295,6 @@ export const getRandomVideoByCategory = karin.command(/^#?憨憨?随机(美女�
   }
 }, { name: 'getRandomVideoByCategory' })
 
-
-
-// 菜单渲染公用方法（新增）
 async function renderMenu(e, menuTitle, commandsList, usageExamples, updateTime) {
   const templateData = {
     type: menuTitle,
@@ -321,7 +318,6 @@ async function renderMenu(e, menuTitle, commandsList, usageExamples, updateTime)
 
 const scale = (pct = 1) => `style='transform:scale(${pct})'`
 
-// 表情包菜单（使用渲染功能）
 export const showExpressionHelp = karin.command(/^#?表情包(帮助|菜单)$/, async (e) => {
   try {
     if (!apiData) {
@@ -340,7 +336,6 @@ export const showExpressionHelp = karin.command(/^#?表情包(帮助|菜单)$/, 
   }
 })
 
-// 图片菜单（使用渲染功能）
 export const showPictureHelp = karin.command(/^#?憨憨图片(帮助|菜单)$/, async (e) => {
   try {
     if (!apiData) {
@@ -357,7 +352,6 @@ export const showPictureHelp = karin.command(/^#?憨憨图片(帮助|菜单)$/, 
   }
 })
 
-// 小姐姐菜单（使用渲染功能）
 export const showGirlHelp = karin.command(/^#?小姐姐(帮助|菜单)$/, async (e) => {
   try {
     if (!apiData) {
@@ -373,7 +367,6 @@ export const showGirlHelp = karin.command(/^#?小姐姐(帮助|菜单)$/, async 
   }
 })
 
-// 通用视频菜单（使用渲染功能）
 export const showVideoHelp = karin.command(/^#?视频(帮助|菜单)$/, async (e) => {
   try {
     if (!apiData) {
@@ -390,7 +383,6 @@ export const showVideoHelp = karin.command(/^#?视频(帮助|菜单)$/, async (e
   }
 })
 
-// 美女视频专用菜单（使用渲染功能）
 export const showBeautyVideoHelp = karin.command(/^#?美女视频(帮助|菜单)$/, async (e) => {
   try {
     if (!apiData) {
