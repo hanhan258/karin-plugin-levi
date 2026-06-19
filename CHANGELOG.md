@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/hanhan258/karin-plugin-levi/compare/v1.2.0...v1.3.0) (2026-06-19)
+
+
+### Features
+
+* QQBot 按钮菜单、图床适配与设置pingtoken指令 ([#11](https://github.com/hanhan258/karin-plugin-levi/issues/11)) ([52fc7b1](https://github.com/hanhan258/karin-plugin-levi/commit/52fc7b18f90d5ee7eee0fe320071c9e2cc14a526))
+
 ## [1.2.0](https://github.com/hanhan258/karin-plugin-levi/compare/v1.1.2...v1.2.0) (2025-06-22)
 
 
