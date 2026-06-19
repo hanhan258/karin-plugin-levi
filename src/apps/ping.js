@@ -1,9 +1,20 @@
 'use strict'
 import { karin, exec } from 'node-karin'
-import { config } from '../../lib/config.js'
+import { config, setConfig } from '../../lib/config.js'
 import pingMan from 'pingman'
 import dns from 'dns'
 import net from 'net'
+
+export const setPingToken = karin.command(/^#?憨憨设置pingtoken/i, async (e) => {
+  const token = e.msg.replace(/^#?憨憨设置pingtoken/i, '').trim()
+  if (!token) {
+    await e.reply('用法：#憨憨设置pingtoken <你的token>\n前往 https://ipinfo.io 注册账号获取 token', true)
+    return true
+  }
+  setConfig('pingToken', token)
+  await e.reply('✅ pingToken 设置成功，已生效（无需重启）', true)
+  return true
+}, { name: 'levi-set-pingtoken', perm: 'master' })
 
 export const ping = karin.command('^#?[pP]ing ', async (e) => {
   if (!config().pingToken) {
