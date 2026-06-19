@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { karin, segment } from "node-karin";
+import { makeKeyboard } from "../../lib/buttons.js";
 
 // 插件路径
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -41,11 +42,17 @@ export const menu = karin.command(/^#?憨憨(菜单|帮助)$/i, async (e) => {
         name: 'karin-plugin-levi-menu',
         file: join(__dirname, '../../resources/menu/index.html'),
         data: options,
-        pageGotoParams: { waitUntil: 'networkidle0' },
-        quality: 100
+        pageGotoParams: { waitUntil: 'networkidle0' }
     });
 
-    e.reply(segment.image(`base64://${img}`))
+    // 导航按钮：点一下直达各功能
+    const keyboard = makeKeyboard([
+        ['#表情包菜单', '#视频菜单', '#小姐姐菜单'],
+        ['#开盘', '#台风路径', '#唱鸭'],
+        ['#坤坤语音', '#网易云', '#绿茶']
+    ]);
+
+    e.reply([segment.image(`base64://${img}`), keyboard])
 });
 
 // 指令美化处理
