@@ -4,6 +4,7 @@ import puppeteer from 'puppeteer'
 import { spawn } from 'child_process'
 import { karin, segment, logger } from 'node-karin'
 import { config } from '../../lib/config.js'
+import { makeKeyboard } from '../../lib/buttons.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -44,7 +45,10 @@ export const typhoonPath = karin.command(/^#?台风路径$/, async (e) => {
             logger.warn(`[台风路径] 生成的GIF超过5MB(实际${(gifBuffer.byteLength / (1024 * 1024)).toFixed(2)}MB)，可能发送失败`)
         }
 
-        await e.reply(segment.image(`base64://${gifBuffer.toString('base64')}`))
+        await e.reply([
+            segment.image(`base64://${gifBuffer.toString('base64')}`),
+            makeKeyboard([[{ text: '🔄 再录一次', cmd: '#台风路径' }]])
+        ])
 
     } catch (error) {
         logger.error('[台风路径] 录制失败:', error)
