@@ -46,13 +46,13 @@ export const menu = karin.command(/^#?憨憨(菜单|帮助)$/i, async (e) => {
     });
 
     // 导航按钮：点一下直达各功能
-    const keyboard = makeKeyboard([
+    const keyboard = makeKeyboard(e, [
         ['#表情包菜单', '#视频菜单', '#小姐姐菜单'],
         ['#开盘', '#台风路径', '#唱鸭'],
         ['#坤坤语音', '#网易云', '#绿茶']
     ]);
 
-    e.reply([segment.image(`base64://${img}`), keyboard])
+    e.reply([segment.image(`base64://${img}`), keyboard].filter(Boolean))
 });
 
 // 指令美化处理

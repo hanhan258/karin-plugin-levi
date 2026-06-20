@@ -117,8 +117,25 @@ ffmpegPath: ''
 
 本插件针对 `@karinjs/adapter-qqbot` v2 做了适配，使用 QQBot 时请注意：
 
-### 1. 图片发送 —— 内置图床上传
-QQBot 发图一律走 markdown 通道，**base64/本地图必须先转成公网 https URL** 才能显示。`src/apps/fileToUrl.js` 已注册全局 `fileToUrl` 处理器，自动把图片上传到图床并返回链接。如需更换图床，修改该文件顶部的 `IMG_BED` 配置即可。
+### 1. 图片发送 —— 需要 fileToUrl 处理器
+QQBot 发图一律走 markdown 通道，**base64/本地图（如菜单渲染图）必须先转成公网 https URL** 才能显示。这需要一个全局 `fileToUrl` 处理器。
+
+为避免把私有图床地址打进公开的 npm 包，本插件**不内置**该处理器，请自行提供一个。最简单的方式是建一个**本地 app 插件**（目录 `plugins/karin-plugin-filetourl/`，**不放 package.json**，Karin 会识别为本地 app 插件、不发布），放入如下文件：
+
+```js
+// plugins/karin-plugin-filetourl/fileToUrl.js
+import { karin, logger } from 'node-karin'
+
+export const fileToUrlHandler = karin.handler('fileToUrl', async (args) => {
+  const { file, type } = args
+  // 1. 把 file(base64://、本地路径、http、Buffer)读成 Buffer
+  // 2. 上传到你的图床/对象存储，拿到公网 https URL
+  // 3. 返回 { url, width, height }（width/height 供 markdown 图片标签使用）
+  return { url, width, height }
+})
+```
+
+> 只用 OneBot 等非 QQBot 适配器时**无需**配置此项：图片走 base64 直发，不经过 fileToUrl。
 
 ### 2. 按钮（keyboard）
 菜单、媒体输出均附带可点按钮（`lib/buttons.js` 提供构建工具）。按钮 `enter:true` 点击即自动发送，受 QQ「每行≤5、最多5行（共≤25）」限制。
