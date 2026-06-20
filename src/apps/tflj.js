@@ -47,8 +47,8 @@ export const typhoonPath = karin.command(/^#?台风路径$/, async (e) => {
 
         await e.reply([
             segment.image(`base64://${gifBuffer.toString('base64')}`),
-            makeKeyboard([[{ text: '🔄 再录一次', cmd: '#台风路径' }]])
-        ])
+            makeKeyboard(e, [[{ text: '🔄 再录一次', cmd: '#台风路径' }]])
+        ].filter(Boolean))
 
     } catch (error) {
         logger.error('[台风路径] 录制失败:', error)
