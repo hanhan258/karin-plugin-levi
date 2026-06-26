@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/hanhan258/karin-plugin-levi/compare/v1.3.1...v1.4.0) (2026-06-26)
+
+
+### Features
+
+* trigger v1.4.0 release ([1862a3d](https://github.com/hanhan258/karin-plugin-levi/commit/1862a3d4ce4fb7e94368b8f3dd67304921875968))
+
 ## [1.3.1](https://github.com/hanhan258/karin-plugin-levi/compare/v1.3.0...v1.3.1) (2026-06-20)
 
 
