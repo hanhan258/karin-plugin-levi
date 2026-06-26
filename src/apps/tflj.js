@@ -66,7 +66,11 @@ async function captureGif(url, duration, width, height, fps) {
     const page = await browser.newPage()
 
     await page.setViewport({ width, height })
-    await page.goto(url, { waitUntil: 'networkidle2' })
+    // 不能用 networkidle2：该站是 SPA + 多个统计 SDK（wpkReporter/aplus/cnzz）持续上报，
+    // 500ms 内永远有活跃连接，networkidle2 必然 30s 超时。
+    // 改用 domcontentloaded（DOM 解析完即返回），再手动等几秒让地图瓦片和台风路径渲染完。
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 })
+    await new Promise(r => setTimeout(r, 4000))
 
     await removeDOMElements(page)
 

@@ -1,6 +1,6 @@
 {
   "name": "karin-plugin-levi",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "author": "hanhan258",
   "type": "module",
   "main": "index.js",
