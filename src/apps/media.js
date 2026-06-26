@@ -188,9 +188,15 @@ export const dynamicMedia = karin.command(/^#?.+$/s, async (e) => {
   if ((apiData.pictureDirs || []).includes(name)) {
     logger.info(`[憨憨富媒体] 匹配图片目录: ${name}`)
     const imageUrl = bustUrl(`${API_CONFIG.PICTURE_API}/${encodeURIComponent(name)}`)
+    // 按图片所属分类决定第二个按钮指向哪个菜单：
+    //   三次元(小姐姐) → 小姐姐菜单，其余 → 表情包菜单
+    const isGirl = (apiData.pictureCategories?.['三次元'] || []).includes(name)
+    const menuBtn = isGirl
+      ? { text: '👧 小姐姐菜单', cmd: '#小姐姐菜单', style: 0 }
+      : { text: '📦 表情包菜单', cmd: '#表情包菜单', style: 0 }
     const keyboard = makeKeyboard(e, [[
       { text: '🔄 再来一张', cmd: `#${name}`, style: 1 },
-      { text: '📦 表情包菜单', cmd: '#表情包菜单', style: 0 }
+      menuBtn
     ]])
     await e.reply([segment.image(imageUrl), keyboard].filter(Boolean))
     return true
