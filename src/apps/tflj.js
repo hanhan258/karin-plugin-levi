@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'url'
 import path from 'path'
-import puppeteer from 'puppeteer'
+import { snapka } from '@karinjs/plugin-puppeteer'
 import { spawn } from 'child_process'
 import { karin, segment, logger } from 'node-karin'
 import { config } from '../../lib/config.js'
@@ -59,7 +59,10 @@ export const typhoonPath = karin.command(/^#?台风路径$/, async (e) => {
 
 // 高效能截图录制
 async function captureGif(url, duration, width, height, fps) {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+    // 复用 @karinjs/plugin-puppeteer 暴露的 snapka 引擎，避免本插件单独装 puppeteer/chromium。
+    // snapka.launch() 返回 PuppeteerCore 包装对象，.browser 才是 puppeteer-core 的 Browser。
+    const core = await snapka.launch({ args: ['--no-sandbox'] })
+    const browser = core.browser
     const page = await browser.newPage()
 
     await page.setViewport({ width, height })
@@ -97,7 +100,7 @@ async function captureGif(url, duration, width, height, fps) {
         const stopCapture = setTimeout(async () => {
             await client.send('Page.stopScreencast')
             ffmpeg.stdin.end()
-            await browser.close()
+            await core.close().catch(() => {})
         }, duration * 1000)
 
         client.on('Page.screencastFrame', async ({ data, sessionId }) => {
@@ -108,7 +111,7 @@ async function captureGif(url, duration, width, height, fps) {
         ffmpeg.on('close', async code => {
             clearTimeout(stopCapture)
             await client.send('Page.stopScreencast').catch(() => { })
-            await browser.close()
+            await core.close().catch(() => {})
             if (code !== 0) reject(new Error(`ffmpeg exited with code ${code}`))
         })
     })

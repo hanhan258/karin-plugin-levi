@@ -42,7 +42,23 @@ pnpm install --filter=karin-plugin-levi
 |---|---|---|
 | **Redis** | 俄罗斯轮盘游戏状态（Karin 内置 redis） | 玩游戏时 |
 | **ffmpeg** | 台风路径 GIF 合成 | `#台风路径` 时 |
-| **puppeteer** | 菜单 / 台风路径截图（随依赖安装） | 是 |
+| **@karinjs/plugin-puppeteer** | 菜单截图 + 台风路径录制（Karin 框架自带插件，提供 `snapka` 引擎） | 是 |
+
+> 💡 本插件不再自带 `puppeteer` 依赖，统一复用 `@karinjs/plugin-puppeteer` 暴露的 `snapka` 引擎：菜单走 `karin.render()`，台风录制走 `snapka.launch()`。请确保 Karin 根目录已安装该插件（`pnpm add @karinjs/plugin-puppeteer`，通常 Karin 模板已自带）。
+
+### Linux 部署提示
+
+菜单模板含 emoji 图标（🔖 🎯 👉 ⏰ 等），部分 Linux 服务器默认未安装 emoji 字体会渲染成方块。若出现此情况，请安装：
+
+```bash
+# Debian / Ubuntu
+sudo apt install fonts-noto-color-emoji
+
+# CentOS / RHEL
+sudo yum install google-noto-color-emoji-fonts
+```
+
+模板已通过 Google Fonts 引入 `Noto Color Emoji` 并配置了跨平台字体回退链，装完系统字体包即可正常显示彩色 emoji。
 
 ---
 
@@ -140,6 +156,20 @@ export const fileToUrlHandler = karin.handler('fileToUrl', async (args) => {
 ### 2. 按钮（keyboard）
 菜单、媒体输出均附带可点按钮（`lib/buttons.js` 提供构建工具）。按钮 `enter:true` 点击即自动发送，受 QQ「每行≤5、最多5行（共≤25）」限制。
 
+按钮会根据场景动态生成：
+
+| 场景 | 按钮内容 |
+|---|---|
+| 主菜单 | 三个分类菜单 + 常用功能入口 |
+| 表情包/小姐姐/视频菜单 | 该分类下所有目录名（点击直接出图/出视频） |
+| 发图后 | 「🔄 再来一张」+ 该图所属分类的菜单（三次元类指向小姐姐菜单，其余指向表情包菜单） |
+| 发视频后 | 「🔄 再来一个」+ 视频菜单 |
+| 俄罗斯轮盘 | 游戏中显示开枪/查弹/结束；结束后显示开盘 |
+| 台风路径 | 「🔄 再录一次」 |
+| 语音 | 一排五个语音指令快捷入口 |
+
+> 非 QQBot 适配器（OneBot 等）下按钮自动隐藏（`makeKeyboard` 返回 `null`，由 `.filter(Boolean)` 滤除），不影响功能。
+
 ### 3. 去除 @ 提及（重要）
 QQBot 群内点按钮/被 @ 触发时，指令前会带 `<@机器人>` 提及，导致匹配失败。请在适配器配置 `@karinjs-adapter-qqbot/config/config.json` 对应 bot 的 `regex` 数组中加入一条，全局剥离：
 
@@ -162,3 +192,9 @@ node . --dev
 
 - Karin 框架：https://github.com/KarinJS/Karin
 - 问题反馈：https://github.com/hanhan258/karin-plugin-levi/issues
+
+---
+
+## 📝 更新日志
+
+详见 [CHANGELOG.md](./CHANGELOG.md)（由 release-please 自动维护）。
