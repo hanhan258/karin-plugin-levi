@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/hanhan258/karin-plugin-levi/compare/v1.4.0...v1.4.1) (2026-06-26)
+
+
+### Bug Fixes
+
+* **tflj:** networkidle2 改 domcontentloaded 修复台风路径超时 ([e3822cd](https://github.com/hanhan258/karin-plugin-levi/commit/e3822cdd89a9753fdc11d8783e7e50ee68efb0f0))
+
 ## [1.4.0](https://github.com/hanhan258/karin-plugin-levi/compare/v1.3.1...v1.4.0) (2026-06-26)
 
 
