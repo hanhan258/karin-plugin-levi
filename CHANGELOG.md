@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/hanhan258/karin-plugin-levi/compare/v1.3.0...v1.3.1) (2026-06-20)
+
+
+### Bug Fixes
+
+* 按钮仅在 QQBot 适配器发送，并将图床 fileToUrl 独立出插件 ([#13](https://github.com/hanhan258/karin-plugin-levi/issues/13)) ([cc4fc60](https://github.com/hanhan258/karin-plugin-levi/commit/cc4fc6011fecbdfad0c6ee9bfbc3b8f37dcd500f))
+
 ## [1.3.0](https://github.com/hanhan258/karin-plugin-levi/compare/v1.2.0...v1.3.0) (2026-06-19)
 
 
